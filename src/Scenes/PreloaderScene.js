@@ -94,6 +94,11 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     this.load.image('platform', 'assets/platform.png');
     this.load.image('coin', 'assets/coin.png');
+    this.load.image('character', 'assets/over.png');
+    this.load.spritesheet('loadIcon', 'assets/load.png', {
+      frameWidth: 100,
+      frameHeight: 110,
+    });
   }
 
   ready () {

@@ -8,6 +8,13 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create () {
+    this.add.image(400, 300, 'background');
+    //Title
+    this.add.text(200, 80, 'Critical Thinking', {
+      fontSize: '40px',
+      fill: '#FFFFFF',
+    });
+
     // Game
     this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Game');
 
