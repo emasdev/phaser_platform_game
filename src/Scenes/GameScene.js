@@ -10,7 +10,7 @@ const gameOptions = {
   jumps: 2,
 };
 
-const credString = 'Made with ♥ by Mari Roque Developer';
+const credString = 'The good life is one inspired by love and guided by knowledge';
 
 
 export default class GameScene extends Phaser.Scene {
@@ -97,7 +97,7 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    physics.add.overlap(this.player, this.coinGroup, this.collectStar, null, this);
+    physics.add.overlap(this.player, this.coinGroup, this.collectCoin, null, this);
 
     // checking for input
     this.input.on('pointerdown', this.jump, this);
@@ -106,16 +106,16 @@ export default class GameScene extends Phaser.Scene {
     // Creating display for Scores
     this.scoreText = add.text(16, 16, 'score: 0', {
       fontSize: '32px',
-      fill: '#000',
+      fill: '#FFFFFF',
     });
 
-    this.creditText = add.text(480, 570, credString, {
+    this.creditText = add.text(240, 570, credString, {
       fontSize: '15px',
-      fill: '#000',
+      fill: '#FFFFFF',
     });
   }
 
-  collectStar(player, coin) {
+  collectCoin(player, coin) {
     this.coinGroup.killAndHide(coin);
     this.coinGroup.remove(coin);
     this.score += 10;
