@@ -7,8 +7,9 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   create () {
+    const credits = 'Created By: Emanuel González \nDesigned by: Wakamole Monster\n\nThanks to Marilena Roque\nand her alligatorRunner project';
     this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
-    this.madeByText = this.add.text(0, 0, 'Created By: Emanuel González', { fontSize: '26px', fill: '#fff' });
+    this.madeByText = this.add.text(0, 0, credits, { fontSize: '26px', fill: '#fff' });
     this.zone = this.add.zone(config.width/2, config.height/2, config.width, config.height);
 
     Phaser.Display.Align.In.Center(

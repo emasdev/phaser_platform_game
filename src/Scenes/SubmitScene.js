@@ -26,7 +26,7 @@ export default class SubmitScene extends Phaser.Scene {
     const submitInfo = () => {
       const test = document.createElement('h4');
       name = document.getElementById('name').value;
-      if (name.length >= 5) {
+      if (name.length >= 3) {
         this.character.visible = false;
         this.loadIcon.visible = true;
         this.loadIcon.anims.play('loading');
@@ -42,6 +42,7 @@ export default class SubmitScene extends Phaser.Scene {
         });
       } else {
         test.innerText = 'Name is too short';
+        test.style.color = "#FFFFFF"
         this.add.dom(400, 110, test);
       }
     };
@@ -59,6 +60,7 @@ export default class SubmitScene extends Phaser.Scene {
     const text = document.createElement('h2');
     text.innerText = 'Provide your Username press Enter and Wait to Submit';
     text.id = 'text';
+    text.style.color = "#FFFFFF"
     this.add.dom(400, 520, text);
     this.input.keyboard.on('keydown-ENTER', submitInfo, this);
   }
