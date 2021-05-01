@@ -10,7 +10,8 @@ const gameOptions = {
   jumps: 3,
 };
 
-let credString = "The good life is one inspired by love and guided by knowledge";
+let credString =
+  "The good life is one inspired by love and guided by knowledge";
 credString += "\ntip: you can jump 3 times after touching land";
 
 export default class GameScene extends Phaser.Scene {
@@ -77,7 +78,11 @@ export default class GameScene extends Phaser.Scene {
     this.addPlatform(800, 800 / 2);
 
     // adding the player;
-    this.player = physics.add.sprite(gameOptions.playerStartPosition, 600 / 2, "player");
+    this.player = physics.add.sprite(
+      gameOptions.playerStartPosition,
+      600 / 2,
+      "player"
+    );
     this.player.setGravityY(gameOptions.playerGravity);
 
     // add poem with triforce
@@ -264,7 +269,9 @@ export default class GameScene extends Phaser.Scene {
       "Reconstructed itself to me, without ideals or hope, and the owner of the Tobacco Shop smiled...",
     ];
     this.poemText = this.poem[this.triforce];
-    this.poemPrint = this.add.text(100, 600 / 3, this.poemText);
+    this.poemPrint = this.add.text(100, 600 / 3, this.poemText, {
+      align: "right",
+    });
 
     // setting collisions between the player and the platform group
     physics.add.collider(this.player, this.platformGroup, () => {
@@ -273,7 +280,13 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    physics.add.overlap(this.player, this.coinGroup, this.collectCoin, null, this);
+    physics.add.overlap(
+      this.player,
+      this.coinGroup,
+      this.collectCoin,
+      null,
+      this
+    );
 
     // checking for input
     this.input.on("pointerdown", this.jump, this);
@@ -297,13 +310,18 @@ export default class GameScene extends Phaser.Scene {
     this.coinGroup.remove(coin);
     this.score += 10;
     this.scoreText.setText(`Score: ${this.score}`);
-    if (!this.poem[this.triforce] && this.triforce <= this.poem[this.triforce]) {
-      this.poemText = this.poemText + "\n";
-    } else {
-      this.poemText = this.poemText + "\n" + this.poem[this.triforce];
+    if (this.triforce <= this.poem.length) {
+      if (
+        this.poem[this.triforce] == undefined &&
+        this.triforce <= this.poem[this.triforce]
+      ) {
+        this.poemText = this.poemText + "\n";
+      } else {
+        this.poemText = this.poemText + "\n" + this.poem[this.triforce];
+      }
+      this.poemPrint.setText(this.poemText);
+      this.poemPrint.setY(this.poemPrint.y - 15);
     }
-
-    this.poemPrint.setText(this.poemText);
   }
 
   // the core of the script: platform are added from the pool or created on the fly
@@ -338,7 +356,10 @@ export default class GameScene extends Phaser.Scene {
       this.platformGroup.add(platform);
     }
     platform.displayWidth = platformWidth;
-    this.nextPlatformDistance = Phaser.Math.Between(gameOptions.spawnRange[0], gameOptions.spawnRange[1]);
+    this.nextPlatformDistance = Phaser.Math.Between(
+      gameOptions.spawnRange[0],
+      gameOptions.spawnRange[1]
+    );
     const coinAppear = Phaser.Math.Between(0, 10);
     if (coinAppear > 5) {
       this.addCoin(posX);
@@ -348,7 +369,10 @@ export default class GameScene extends Phaser.Scene {
   // the player jumps when on the ground, or once in the air as long as there are jumps
   // left and the first jump was on the ground
   jump() {
-    if (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)) {
+    if (
+      this.player.body.touching.down ||
+      (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)
+    ) {
       if (this.player.body.touching.down) {
         this.playerJumps = 0;
       }
@@ -367,7 +391,7 @@ export default class GameScene extends Phaser.Scene {
 
     // recycling platforms
     let minDistance = 800;
-    this.platformGroup.getChildren().forEach((platform) => {
+    this.platformGroup.getChildren().forEach(platform => {
       const platformDistance = 800 - platform.x - platform.displayWidth / 2;
       minDistance = Math.min(minDistance, platformDistance);
       if (platform.x < -platform.displayWidth / 2) {
@@ -377,7 +401,7 @@ export default class GameScene extends Phaser.Scene {
     }, this);
 
     // recycling coins
-    this.coinGroup.getChildren().forEach((coin) => {
+    this.coinGroup.getChildren().forEach(coin => {
       if (coin.x < -20) {
         this.coinGroup.killAndHide(coin);
         this.coinGroup.remove(coin);
@@ -386,7 +410,10 @@ export default class GameScene extends Phaser.Scene {
 
     // adding new platforms
     if (minDistance > this.nextPlatformDistance) {
-      const nextPlatformWidth = Phaser.Math.Between(gameOptions.platformSizeRange[0], gameOptions.platformSizeRange[1]);
+      const nextPlatformWidth = Phaser.Math.Between(
+        gameOptions.platformSizeRange[0],
+        gameOptions.platformSizeRange[1]
+      );
       this.addPlatform(nextPlatformWidth, 800 + nextPlatformWidth / 2);
     }
   }
