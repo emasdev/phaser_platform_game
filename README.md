@@ -41,8 +41,6 @@
 
 ## Production steps
 
-
-
 ## Authors
 
 👤 **Emanuel González**
@@ -50,3 +48,9 @@
 - Github: [@emasdev](https://github.com/emasdev)
 - Twitter: [@elemasss](https://twitter.com/elemass)
 - Linkedin: [@emasdev](https://www.linkedin.com/in/emasdev/)
+
+## Credits
+
+- Poem: Fernando Pessoa - tabaqueria
+- Design by: Wakamole Monster
+- Based on: Marilena Roque Alligator Runner game
